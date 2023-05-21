@@ -86,14 +86,14 @@ const PickupScreen = () => {
     }
 
     return (
-        <SafeAreaView className="flex-1 bg-gray-100 pt-16">
+        <SafeAreaView className="flex-1 bg-gray-100 ">
             {/* heading */}
             <View className="flex-row items-center relative">
                 <TouchableOpacity
                     className="mx-4 bg-white shadow-lg rounded-3xl w-10 p-2"
                     onPress={() => navigation.goBack()}>
                     <ChevronLeftIcon size={20} color='#00ccbb' />
-                </TouchableOpacity >
+                </TouchableOpacity>
                 <View className="absolute right-48">
                     <Text className="font-extrabold text-gray-600 text-3xl">Enter Details</Text>
                 </View>

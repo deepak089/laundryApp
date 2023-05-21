@@ -4,17 +4,27 @@ import BackButton from '../components/BackButton';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { useNavigation } from '@react-navigation/native';
+import Loading from '../components/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserLoading } from '../redux/slice/UserSlice';
 
 const ForgetPasswordScreen = () => {
 
     const navigation = useNavigation();
+    const [loading, setLoading] = useState(false);
 
     const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
+    const { userLoading } = useSelector(state => state.user);
+
 
     const handleResetPassword = async () => {
+        dispatch(setUserLoading(true));
         if (email != null) {
             await sendPasswordResetEmail(auth, email).then(() => {
                 alert('check ur email');
+                dispatch(setUserLoading(false));
+
                 setTimeout(() => {
                     navigation.goBack();
                 }, 2000);
@@ -50,14 +60,21 @@ const ForgetPasswordScreen = () => {
                     <Text className="text-gray-600 text-lg font-bold">
                         Enter Email
                     </Text>
-                    <TextInput value={email} onChangeText={value => setEmail(value)} className="p-4 bg-white rounded-full mb-3" />
+                    <TextInput value={email} onChangeText={value => setEmail(value)} className="p-4 bg-white rounded-lg mb-3" />
 
                 </View>
 
                 <View>
-                    <TouchableOpacity onPress={() => handleResetPassword()} className="bg-[#00CCBB] my-6 rounded-full p-3 shadow-sm mx-2">
-                        <Text className="text-center text-white text-lg font-bold">Click Me</Text>
-                    </TouchableOpacity>
+                   {
+                            userLoading ? (<Loading />)
+                                :
+                                (
+                                    <TouchableOpacity onPress={handleResetPassword} className="bg-[#00CCBB] my-6 rounded-lg p-3 shadow-sm mx-2">
+                                        <Text className="text-center text-white text-lg font-bold">Click me</Text>
+                                    </TouchableOpacity>
+                                )
+                        }
+
                 </View>
             </View>
         </KeyboardAvoidingView>

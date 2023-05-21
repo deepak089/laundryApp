@@ -163,13 +163,15 @@ const EditProfileScreen = () => {
             <KeyboardAvoidingView className="flex justify-between h-full bg-gray-200">
                 <View className="flex justify-between h-full mx-4">
 
-                    <View className="relative mt-5">
-                        <View className="absolute top-0 left-0">
-                            <BackButton />
+                    <View className="flex-row items-center relative">
+                        <TouchableOpacity
+                            className="mx-4 bg-white shadow-lg rounded-3xl w-10 p-2"
+                            onPress={() => navigation.goBack()}>
+                            <ChevronLeftIcon size={20} color='#00ccbb' />
+                        </TouchableOpacity>
+                        <View className="absolute right-48">
+                            <Text className="font-extrabold text-gray-600 text-3xl">Profile</Text>
                         </View>
-                        <Text className="text-gray-600 font-extrabold text-3xl shadow-lg text-center">
-                            My profile
-                        </Text>
                     </View>
 
                     <TouchableOpacity onPress={toggleModal} className="flex-col justify-center items-center">

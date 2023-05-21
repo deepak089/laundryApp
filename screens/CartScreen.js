@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, TouchableOpacity, Text, View, SafeAreaView, Alert } from 'react-native'
 import React from 'react'
 import { ChevronLeftIcon, MinusIcon, PlusIcon } from 'react-native-heroicons/solid'
-import {  decrementQuantity, incrementQuantity } from '../redux/slice/CartSlice'
+import { decrementQuantity, incrementQuantity } from '../redux/slice/CartSlice'
 import { decrementQty, incrementQty } from '../redux/slice/ProductSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -19,7 +19,7 @@ const CartScreen = () => {
   const total = cart?.map((item) => item.quantity * item.price).reduce((cur, prev) => cur + prev, 0);
   const dispatch = useDispatch();
   const route = useRoute();
-  const userUid=auth.currentUser.uid;
+  const userUid = auth.currentUser.uid;
   const formatDate = moment(route.params.pickUpDate).utc().format('YYYY-MM-DD');
   const navigation = useNavigation();
 
@@ -38,16 +38,16 @@ const CartScreen = () => {
 
   }
   return (
-    <SafeAreaView className="flex-1 bg-gray-100 pt-16">
+    <SafeAreaView className="flex-1 bg-gray-100">
 
       <View className="flex-row items-center relative">
         <TouchableOpacity
           className="mx-4 bg-white shadow-lg rounded-3xl w-10 p-2"
           onPress={() => navigation.replace('Pickup')}>
           <ChevronLeftIcon size={20} color='#00ccbb' />
-        </TouchableOpacity >
-        <View className="absolute right-56">
-          <Text className="font-extrabold text-gray-600 text-3xl">Cart</Text>
+        </TouchableOpacity>
+        <View className="absolute right-48">
+          <Text className="font-extrabold text-gray-600 text-3xl">My Cart</Text>
         </View>
       </View>
 
@@ -120,7 +120,7 @@ const CartScreen = () => {
                   <Text className="font-bold text-gray-400 text-sm">Selected pickup time</Text>
                   <Text className="pb-4">{route.params.selectedTime}</Text>
                 </View>
-                 <View className="flex-row items-center justify-between mb-2 border-b-2">
+                <View className="flex-row items-center justify-between mb-2 border-b-2">
                   <Text className="font-bold text-gray-400 text-sm">Selected  service</Text>
                   <Text className="pb-4">{route.params.service_selected}</Text>
                 </View>

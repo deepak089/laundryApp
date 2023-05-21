@@ -97,7 +97,7 @@ const HomeScreen = () => {
 
 
     return (
-        <SafeAreaView className="pt-16">
+        <SafeAreaView>
             {/* location and profile */}
             <View className="flex-row items-center mx-4 relative z-10">
                 <MapPinIcon size={20} color='#00ccbb' />

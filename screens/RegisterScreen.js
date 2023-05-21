@@ -8,6 +8,7 @@ import { auth, db } from '../config/firebase';
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
+import { setUserLoading } from '../redux/slice/UserSlice';
 
 
 const RegisterScreen = () => {
@@ -17,10 +18,12 @@ const RegisterScreen = () => {
     const [phone, setPhone] = useState('');
     const [name, setName] = useState('');
     const [gender, setGender] = useState('');
-    const [loading, setLoading] = useState(false);
 
     const navigation = useNavigation();
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false);
+    const { userLoading } = useSelector(state => state.user);
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false
@@ -41,6 +44,7 @@ const RegisterScreen = () => {
     }, [])
 
     const handleSubmit = async () => {
+        dispatch(setUserLoading(true));
         if (email && password && phone) {
             // go to home 
             await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
@@ -52,8 +56,10 @@ const RegisterScreen = () => {
                     phone: phone,
                     name: name,
                     gender: gender,
-                    userImg:null 
+                    userImg: null
                 })
+                dispatch(setUserLoading(false));
+
             })
         } else {
             //show Error
@@ -108,9 +114,16 @@ const RegisterScreen = () => {
 
                     </View>
                     <View>
-                        <TouchableOpacity onPress={handleSubmit} className="bg-[#00CCBB] my-6 rounded-lg p-3 shadow-sm">
-                            <Text className="text-center text-white text-lg font-extrabold">Sign Up</Text>
-                        </TouchableOpacity>
+                        {
+                            userLoading ? (<Loading />)
+                                :
+                                (
+                                    <TouchableOpacity onPress={handleSubmit} className="bg-[#00CCBB] my-6 rounded-lg p-3 shadow-sm mx-2">
+                                        <Text className="text-center text-white text-lg font-bold">Sign Up</Text>
+                                    </TouchableOpacity>
+                                )
+                        }
+
                     </View>
                 </View>
 
