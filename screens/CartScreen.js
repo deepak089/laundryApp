@@ -120,6 +120,10 @@ const CartScreen = () => {
                   <Text className="font-bold text-gray-400 text-sm">Selected pickup time</Text>
                   <Text className="pb-4">{route.params.selectedTime}</Text>
                 </View>
+                 <View className="flex-row items-center justify-between mb-2 border-b-2">
+                  <Text className="font-bold text-gray-400 text-sm">Selected  service</Text>
+                  <Text className="pb-4">{route.params.service_selected}</Text>
+                </View>
               </View>
               <View className="flex-row items-center justify-between mb-2">
                 <Text className="font-bold text-gray-600 text-sm">To Pay</Text>

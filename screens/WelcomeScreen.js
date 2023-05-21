@@ -11,7 +11,7 @@ const WelcomeScreen = () => {
         <View className="flex-row justify-center mt-24">
           <Image
             source={require('../assets/welcome.png')}
-            className="w-96 h-96 shadow-lg"
+            className="w-96 h-96"
           />
         </View>
         <View className="mx-4">

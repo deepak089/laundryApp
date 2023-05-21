@@ -3,10 +3,15 @@ import React from "react";
 import LottieView from "lottie-react-native";
 import { useDispatch } from "react-redux";
 import { cleanCart } from "../redux/slice/CartSlice";
+import { useNavigation } from "@react-navigation/native";
 
 const OrderScreen = () => {
     const dispatch=useDispatch();
     dispatch(cleanCart());
+    const navigation=useNavigation();
+    setTimeout(()=>{
+      navigation.navigate('Home');
+    },4000);
 
   return (
     <SafeAreaView>

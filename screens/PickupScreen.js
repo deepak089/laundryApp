@@ -1,18 +1,21 @@
-import { LogBox, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, LogBox, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react';
 import HorizontalDatepicker from '@awrminkhodaei/react-native-horizontal-datepicker';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { ChevronLeftIcon, MinusIcon, PlusIcon } from 'react-native-heroicons/solid'
+import Services from '../components/Services';
+import { services } from '../data/services';
 
 LogBox.ignoreLogs([
-  'Non-serializable values were found in the navigation state',
+    'Non-serializable values were found in the navigation state',
 ]);
 
 const PickupScreen = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState([]);
     const [delivery, setDelivery] = useState([]);
+    const [selectService,setSelectService]=useState([]);
     const navigation = useNavigation();
     const cart = useSelector((state) => state.cart.cart);
     const total = cart.map((item) => item.quantity * item.price).reduce((cur, prev) => cur + prev, 0);
@@ -68,14 +71,16 @@ const PickupScreen = () => {
         },
     ];
 
+
     const proceedToCart = () => {
-        if (!selectedTime || !selectedDate || !delivery) {
+        if (!selectedTime || !selectedDate || !delivery || !selectService) {
             alert('Enter the field first');
-        } else if (selectedDate && selectedTime && delivery) {
+        } else if (selectedDate && selectedTime && delivery && selectService) {
             navigation.navigate('Cart', {
                 pickUpDate: selectedDate,
                 selectedTime: selectedTime,
                 no_Of_days: delivery,
+                service_selected:selectService
             });
         }
     }
@@ -158,6 +163,24 @@ const PickupScreen = () => {
                                 })
                             }
                         </ScrollView>
+                    </View>
+
+                    <View className="mt-2">
+                        <View className="shadow-2xl m-4">
+                            <Text className="text-lg text-gray-600 font-semibold">Select Service</Text>
+                            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                                {services.map((service, index) => (
+                                    <TouchableOpacity
+                                    onPress={()=> setSelectService(service?.name)}
+                                        className={selectService.includes(service?.name) ? 
+                                        ("bg-green-200 p-4 mr-4 shadow-sm rounded-2xl items-center"): ("bg-gray-200 p-4 mr-4 shadow-sm rounded-2xl items-center")} key={index}>
+                                        <Image source={{ uri: service.image }} className="h-14 w-14" />
+
+                                        <Text className={selectService.includes(service?.name) ? ("text-sm items-center mt-2 text-green-2") : ("text-sm items-center mt-2") }>{service.name}</Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </ScrollView>
+                        </View>
                     </View>
                 </View>
                 {/* Button for continue */}

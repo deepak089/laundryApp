@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "123433015218",
+    "project_id": "laundry-yt",
+    "storage_bucket": "laundry-yt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123433015218:android:9b9ab2524a658a6db3b6ab",
+        "android_client_info": {
+          "package_name": "com.expo.laundry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123433015218-po5evuig8sa424o2eht1qrpt6t1tvo41.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.expo.laundry",
+            "certificate_hash": "bfb8569767d5ebdfb59d672597ca28389418f81c"
+          }
+        },
+        {
+          "client_id": "123433015218-udh7dg6f304vj4i0jdgo0ttiqvft7n58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU8i2tOlb-cQh_TMUOf8c7rUjLsY4oZ3E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123433015218-udh7dg6f304vj4i0jdgo0ttiqvft7n58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

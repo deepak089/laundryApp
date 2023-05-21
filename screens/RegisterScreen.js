@@ -7,6 +7,7 @@ import BackButton from '../components/BackButton';
 import { auth, db } from '../config/firebase';
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
 
 
 const RegisterScreen = () => {
@@ -19,7 +20,7 @@ const RegisterScreen = () => {
     const [loading, setLoading] = useState(false);
 
     const navigation = useNavigation();
-
+    const dispatch=useDispatch();
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false
@@ -50,7 +51,8 @@ const RegisterScreen = () => {
                     email: user,
                     phone: phone,
                     name: name,
-                    gender: gender
+                    gender: gender,
+                    userImg:null 
                 })
             })
         } else {
